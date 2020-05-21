@@ -1,4 +1,5 @@
 import 'package:FinanceApp/transaction.dart';
+import 'package:FinanceApp/user_transactions.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,15 +21,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Transaction> transactions = [
-    Transaction(
-        id: "t1", title: "New Shoes", amount: 69.99, date: DateTime.now()),
-    Transaction(
-        id: "t2",
-        title: "Weekly Groceries",
-        amount: 16.53,
-        date: DateTime.now()),
-  ];
+  final List<Transaction> transactions = [];
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,24 +41,7 @@ class MyHomePage extends StatelessWidget {
             ),
             width: double.infinity,
           ),
-          Column(
-            children: transactions.map((transaction) {
-              return Card(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Container(child: Text(transaction.amount.toString())),
-                    Column(
-                      children: <Widget>[
-                        Text(transaction.title),
-                        Text(transaction.date.toString())
-                      ],
-                    )
-                  ],
-                ),
-              );
-            }).toList(),
-          )
+          UserTransactions(),
         ],
       ),
     );
