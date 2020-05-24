@@ -21,7 +21,8 @@ class MyApp extends StatelessWidget {
               title: TextStyle(
                   fontFamily: "OpenSans",
                   fontWeight: FontWeight.bold,
-                  fontSize: 18)),
+                  fontSize: 18),
+              button: TextStyle(color: Colors.white)),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           appBarTheme: AppBarTheme(
             textTheme: ThemeData.light().textTheme.copyWith(
@@ -49,11 +50,11 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String title, double amount) {
+  void _addNewTransaction(String title, double amount, DateTime chosenDate) {
     final Transaction transaction = Transaction(
         title: title,
         amount: amount,
-        date: DateTime.now(),
+        date: chosenDate,
         id: "t${_transactions.length + 1}");
     setState(() {
       _transactions.add(transaction);
@@ -73,6 +74,12 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void _deleteTransaction(String id) {
+    setState(() {
+      _transactions.removeWhere((transaction) => transaction.id == id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ChartWidget(
             recentTransactions: _recentTransactions,
           ),
-          TransactionList(_transactions),
+          TransactionList(_transactions, _deleteTransaction),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
