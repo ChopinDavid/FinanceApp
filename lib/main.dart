@@ -118,7 +118,8 @@ class _MyHomePageState extends State<MyHomePage> {
     final transactionListWidget = Container(
       height: (mediaQuery.size.height -
               appBar.preferredSize.height -
-              mediaQuery.padding.top) *
+              mediaQuery.padding.top -
+              mediaQuery.padding.bottom) *
           0.7,
       child: TransactionList(_transactions, _deleteTransaction),
     );
@@ -130,7 +131,10 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text("Show Chart", style: Theme.of(context).textTheme.title,),
+                Text(
+                  "Show Chart",
+                  style: Theme.of(context).textTheme.title,
+                ),
                 Switch.adaptive(
                   activeColor: Theme.of(context).accentColor,
                   value: _showChart,
@@ -146,7 +150,8 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               height: (mediaQuery.size.height -
                       appBar.preferredSize.height -
-                      mediaQuery.padding.top) *
+                      mediaQuery.padding.top -
+                      mediaQuery.padding.bottom) *
                   0.3,
               child: ChartWidget(
                 recentTransactions: _recentTransactions,
