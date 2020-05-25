@@ -22,7 +22,10 @@ class ChartWidget extends StatelessWidget {
         }
       }
 
-      return {"day": DateFormat.E().format(weekDay).substring(0, 1), "amount": totalSum};
+      return {
+        "day": DateFormat.E().format(weekDay).substring(0, 1),
+        "amount": totalSum
+      };
     }).reversed.toList();
   }
 
@@ -45,7 +48,13 @@ class ChartWidget extends StatelessWidget {
           children: groupedTransactionValues.map((data) {
             return Flexible(
               fit: FlexFit.tight,
-              child: ChartBarWidget(label: data["day"], spending: data["amount"], spendingPercentOfTotal: totalSpending == 0.0 ? 0.0 : (data["amount"] as double) / totalSpending,),
+              child: ChartBarWidget(
+                label: data["day"],
+                spending: data["amount"],
+                spendingPercentOfTotal: totalSpending == 0.0
+                    ? 0.0
+                    : (data["amount"] as double) / totalSpending,
+              ),
             );
           }).toList(),
         ),
